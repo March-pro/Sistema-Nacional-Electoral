@@ -15,18 +15,18 @@ while (seguirVotando)
     Console.ForegroundColor = ConsoleColor.Green;
     Console.WriteLine("  /$$$$$$  /$$            /$$                                             /$$$$$$$$ /$$                      /$$                                  /$$");
 
-    Console.ForegroundColor = ConsoleColor.White; 
+    Console.ForegroundColor = ConsoleColor.White;
     Console.WriteLine(" /$$__  $$|__/           | $$                                            | $$_____/| $$                     | $$                                 | $$");
     Console.WriteLine("| $$  \\__/ /$$  /$$$$$$$/$$$$$$    /$$$$$$  /$$$$$$/$$$$   /$$$$$$       | $$      | $$  /$$$$$$   /$$$$$$$/$$$$$$    /$$$$$$   /$$$$$$  /$$$$$$ | $$");
 
-    Console.ForegroundColor = ConsoleColor.Red; 
+    Console.ForegroundColor = ConsoleColor.Red;
     Console.WriteLine("|  $$$$$$ | $$ /$$_____/_  $$_/   /$$__  $$| $$_  $$_  $$ |____  $$      | $$$$$   | $$ /$$__  $$ /$$_____/_  $$_/   /$$__  $$ /$$__  $$|____  $$| $$");
     Console.WriteLine(" \\____  $$| $$|  $$$$$$  | $$    | $$$$$$$$| $$ \\ $$ \\ $$  /$$$$$$$      | $$__/   | $$| $$$$$$$$| $$       | $$    | $$  \\ $$| $$  \\__/ /$$$$$$$| $$");
 
-    Console.ForegroundColor = ConsoleColor.Green; 
+    Console.ForegroundColor = ConsoleColor.Green;
     Console.WriteLine(" /$$  \\ $$| $$ \\____  $$ | $$ /$$| $$_____/| $$ | $$ | $$ /$$__  $$      | $$      | $$| $$_____/| $$       | $$ /$$| $$  | $$| $$      /$$__  $$| $$");
 
-    Console.ForegroundColor = ConsoleColor.White; 
+    Console.ForegroundColor = ConsoleColor.White;
     Console.WriteLine("|  $$$$$$/| $$ /$$$$$$$/ |  $$$$/|  $$$$$$$| $$ | $$ | $$|  $$$$$$$      | $$$$$$$$| $$|  $$$$$$$|  $$$$$$$ |  $$$$/|  $$$$$$/| $$     |  $$$$$$$| $$");
 
     Console.ForegroundColor = ConsoleColor.Red;
@@ -53,46 +53,47 @@ while (seguirVotando)
     Console.WriteLine("1. Messi");
     Console.WriteLine("2. Mfrappé");
     Console.WriteLine("3. Penaldo");
-    Console.WriteLine("4. Voto en blanco");
+    Console.WriteLine("4. Voto en blanco\n");
+
     Console.WriteLine("5. Mostrar resultados");
     Console.WriteLine("6. Simulación de votaciones");
-
+    Console.SetCursorPosition(0, 26);
     Console.Write("Ingresa tu elección: ");
     opcionVoto = Console.ReadLine();
 
-if (opcionVoto == "1")
-{
-    candidatoA++;
-    totalVotos++;
-}
-else if (opcionVoto == "2")
-{
-    candidatoB++;
-    totalVotos++;
-}
-else if (opcionVoto == "3")
-{
-    candidatoC++;
-    totalVotos++;
-}
-else if (opcionVoto == "4")
-{
-    votosNulos++;
-    totalVotos++;
-}
-else if (opcionVoto == "5")
-{
-    MostrarResultados(candidatoA, candidatoB, candidatoC, votosNulos, totalVotos);
-}
-else if (opcionVoto == "6")
-{
-    SimulacionVotos(generador, ref candidatoA, ref candidatoB, ref candidatoC, ref votosNulos, ref totalVotos);
-}
-else
-{
-    Console.WriteLine("Opción no válida. Inténtalo nuevamente.");
-    Console.ReadKey();
-}
+    if (opcionVoto == "1")
+    {
+        candidatoA++;
+        totalVotos++;
+    }
+    else if (opcionVoto == "2")
+    {
+        candidatoB++;
+        totalVotos++;
+    }
+    else if (opcionVoto == "3")
+    {
+        candidatoC++;
+        totalVotos++;
+    }
+    else if (opcionVoto == "4")
+    {
+        votosNulos++;
+        totalVotos++;
+    }
+    else if (opcionVoto == "5")
+    {
+        MostrarResultados(candidatoA, candidatoB, candidatoC, votosNulos, totalVotos);
+    }
+    else if (opcionVoto == "6")
+    {
+        SimulacionVotos(generador, ref candidatoA, ref candidatoB, ref candidatoC, ref votosNulos, ref totalVotos);
+    }
+    else
+    {
+        Console.WriteLine("Opción no válida. Inténtalo nuevamente.");
+        Console.ReadKey();
+    }
 }
 
 void MostrarResultados(int a, int b, int c, int blanco, int total)
