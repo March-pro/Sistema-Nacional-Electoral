@@ -3,10 +3,7 @@ int altoVentana = Console.WindowHeight;
 string separador = new string('-', anchoVentana);
 string opcionVoto = "";
 int totalVotos = 0;
-int Messi = 0;
-int Mfrappé = 0;
-int Penaldo = 0;
-int votosNulos = 0;
+int candidatoA = 0, candidatoB = 0, candidatoC = 0, votosNulos = 0;
 Random generador = new Random();
 bool seguirVotando = true;
 
@@ -66,17 +63,17 @@ while (seguirVotando)
 
     if (opcionVoto == "1")
     {
-        Messi++;
+        candidatoA++;
         totalVotos++;
     }
     else if (opcionVoto == "2")
     {
-        Mfrappé++;
+        candidatoB++;
         totalVotos++;
     }
     else if (opcionVoto == "3")
     {
-        Penaldo++;
+        candidatoC++;
         totalVotos++;
     }
     else if (opcionVoto == "4")
@@ -86,11 +83,11 @@ while (seguirVotando)
     }
     else if (opcionVoto == "5")
     {
-        MostrarResultados(Messi, Mfrappé, Penaldo, votosNulos, totalVotos);
+        MostrarResultados(candidatoA, candidatoB, candidatoC, votosNulos, totalVotos);
     }
     else if (opcionVoto == "6")
     {
-        SimulacionVotos(generador, ref Messi, ref Mfrappé, ref Penaldo, ref votosNulos, ref totalVotos);
+        SimulacionVotos(generador, ref candidatoA, ref candidatoB, ref candidatoC, ref votosNulos, ref totalVotos);
     }
     else
     {
@@ -106,9 +103,9 @@ void MostrarResultados(int a, int b, int c, int blanco, int total)
     double porcentajeC = (total > 0) ? ((double)c / total) * 100 : 0;
     double porcentajeBlanco = (total > 0) ? ((double)blanco / total) * 100 : 0;
 
-    Console.WriteLine($"Messi: {a} votos ({porcentajeA:F1}%) {new string('#', (int)(porcentajeA / 2))}");
-    Console.WriteLine($"Mfrappé: {b} votos ({porcentajeB:F1}%) {new string('#', (int)(porcentajeB / 2))}");
-    Console.WriteLine($"Penaldo: {c} votos ({porcentajeC:F1}%) {new string('#', (int)(porcentajeC / 2))}");
+    Console.WriteLine($"Candidato A: {a} votos ({porcentajeA:F1}%) {new string('#', (int)(porcentajeA / 2))}");
+    Console.WriteLine($"Candidato B: {b} votos ({porcentajeB:F1}%) {new string('#', (int)(porcentajeB / 2))}");
+    Console.WriteLine($"Candidato C: {c} votos ({porcentajeC:F1}%) {new string('#', (int)(porcentajeC / 2))}");
     Console.WriteLine($"Voto en blanco: {blanco} votos ({porcentajeBlanco:F1}%) {new string('#', (int)(porcentajeBlanco / 2))}");
 }
 
