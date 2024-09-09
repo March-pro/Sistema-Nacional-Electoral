@@ -60,35 +60,39 @@ while (seguirVotando)
     Console.Write("Ingresa tu elección: ");
     opcionVoto = Console.ReadLine();
 
-   if (opcionVoto)
-    {
-        case "1":
-            candidatoA++;
-            totalVotos++;
-            break;
-        case "2":
-            candidatoB++;
-            totalVotos++;
-            break;
-        case "3":
-            candidatoC++;
-            totalVotos++;
-            break;
-        case "4":
-            votosNulos++;
-            totalVotos++;
-            break;
-        case "5":
-            MostrarResultados(candidatoA, candidatoB, candidatoC, votosNulos, totalVotos);
-            break;
-        case "6":
-            SimulacionVotos(generador, ref candidatoA, ref candidatoB, ref candidatoC, ref votosNulos, ref totalVotos);
-            break;
-        default:
-            Console.WriteLine("Opción no válida. Inténtalo nuevamente.");
-            Console.ReadKey();
-            break;
-    }
+if (opcionVoto == "1")
+{
+    candidatoA++;
+    totalVotos++;
+}
+else if (opcionVoto == "2")
+{
+    candidatoB++;
+    totalVotos++;
+}
+else if (opcionVoto == "3")
+{
+    candidatoC++;
+    totalVotos++;
+}
+else if (opcionVoto == "4")
+{
+    votosNulos++;
+    totalVotos++;
+}
+else if (opcionVoto == "5")
+{
+    MostrarResultados(candidatoA, candidatoB, candidatoC, votosNulos, totalVotos);
+}
+else if (opcionVoto == "6")
+{
+    SimulacionVotos(generador, ref candidatoA, ref candidatoB, ref candidatoC, ref votosNulos, ref totalVotos);
+}
+else
+{
+    Console.WriteLine("Opción no válida. Inténtalo nuevamente.");
+    Console.ReadKey();
+}
 }
 
 void MostrarResultados(int a, int b, int c, int blanco, int total)
