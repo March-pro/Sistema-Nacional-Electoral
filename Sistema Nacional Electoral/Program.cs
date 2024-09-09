@@ -9,29 +9,46 @@ bool seguirVotando = true;
 
 while (seguirVotando)
 {
+    //Aquí usamos chat GPT para ver como ponerle colores a cada ciertas lineas del titulo
+    //Usamos la idea de nuestros compañeros Emiliano Martínez y de Luis Martínez de poerle color al título.
+    //Funciona con el comando Console.ForegroundColor = ConsoleColor.(color asignado);
+    Console.ForegroundColor = ConsoleColor.Green;
     Console.WriteLine("  /$$$$$$  /$$            /$$                                             /$$$$$$$$ /$$                      /$$                                  /$$");
+
+    Console.ForegroundColor = ConsoleColor.White; 
     Console.WriteLine(" /$$__  $$|__/           | $$                                            | $$_____/| $$                     | $$                                 | $$");
     Console.WriteLine("| $$  \\__/ /$$  /$$$$$$$/$$$$$$    /$$$$$$  /$$$$$$/$$$$   /$$$$$$       | $$      | $$  /$$$$$$   /$$$$$$$/$$$$$$    /$$$$$$   /$$$$$$  /$$$$$$ | $$");
+
+    Console.ForegroundColor = ConsoleColor.Red; 
     Console.WriteLine("|  $$$$$$ | $$ /$$_____/_  $$_/   /$$__  $$| $$_  $$_  $$ |____  $$      | $$$$$   | $$ /$$__  $$ /$$_____/_  $$_/   /$$__  $$ /$$__  $$|____  $$| $$");
     Console.WriteLine(" \\____  $$| $$|  $$$$$$  | $$    | $$$$$$$$| $$ \\ $$ \\ $$  /$$$$$$$      | $$__/   | $$| $$$$$$$$| $$       | $$    | $$  \\ $$| $$  \\__/ /$$$$$$$| $$");
+
+    Console.ForegroundColor = ConsoleColor.Green; 
     Console.WriteLine(" /$$  \\ $$| $$ \\____  $$ | $$ /$$| $$_____/| $$ | $$ | $$ /$$__  $$      | $$      | $$| $$_____/| $$       | $$ /$$| $$  | $$| $$      /$$__  $$| $$");
+
+    Console.ForegroundColor = ConsoleColor.White; 
     Console.WriteLine("|  $$$$$$/| $$ /$$$$$$$/ |  $$$$/|  $$$$$$$| $$ | $$ | $$|  $$$$$$$      | $$$$$$$$| $$|  $$$$$$$|  $$$$$$$ |  $$$$/|  $$$$$$/| $$     |  $$$$$$$| $$");
+
+    Console.ForegroundColor = ConsoleColor.Red;
     Console.WriteLine(" \\______/ |__/|_______/   \\___/   \\_______/|__/ |__/ |__/ \\_______/      |________/|__/ \\_______/ \\_______/  \\___/   \\______/ |__/      \\_______/|__/");
-    Console.WriteLine("                                                                                                                                                     ");
-    Console.WriteLine("                                                                                                                                                     ");
-    Console.WriteLine("                                                                                                                                                     ");
+
+    Console.ResetColor();
+    Console.ForegroundColor = ConsoleColor.DarkYellow;
     Console.WriteLine("\nBienvenido al Sistema de Votación. Vota con responsabilidad.");
-    Console.ForegroundColor = ConsoleColor.Green;
+    Console.ResetColor();
+
+    Console.ForegroundColor = ConsoleColor.Cyan;
     Console.WriteLine($"\n" + separador + "\n");
     Console.ResetColor();
 
     string resumenVotos = $"Votos totales: {totalVotos}";
     Console.WriteLine(resumenVotos.PadLeft((anchoVentana + resumenVotos.Length) / 2));
 
-    Console.ForegroundColor = ConsoleColor.Red;
+    Console.ForegroundColor = ConsoleColor.Blue;
     Console.WriteLine($"\n" + separador);
     Console.ResetColor();
 
+    // Menú de opciones
     Console.WriteLine("Selecciona a tu candidato favorito ingresando su número correspondiente.\n");
     Console.WriteLine("1. Messi");
     Console.WriteLine("2. Mfrappé");
@@ -43,7 +60,7 @@ while (seguirVotando)
     Console.Write("Ingresa tu elección: ");
     opcionVoto = Console.ReadLine();
 
-    switch (opcionVoto)
+   if (opcionVoto)
     {
         case "1":
             candidatoA++;
