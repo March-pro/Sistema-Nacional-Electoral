@@ -56,12 +56,12 @@ while (seguirVotando)
     Console.WriteLine("2. Mfrappé");
     Console.WriteLine("3. Penaldo");
     Console.WriteLine("4. Voto en blanco\n");
-
-    Console.WriteLine("5. Mostrar resultados");
-    Console.WriteLine("6. Simulación de votaciones");
     Console.SetCursorPosition(0, 26);
     Console.Write("Ingresa tu elección: ");
     opcionVoto = Console.ReadLine();
+    Console.WriteLine("5. Mostrar resultados");
+    Console.WriteLine("6. Simulación de votaciones");
+    
     Console.Clear();
 
     if (opcionVoto == "1")
@@ -86,48 +86,87 @@ while (seguirVotando)
     }
     else if (opcionVoto == "5")
     {
-       MostrarResultados(candidatoA, candidatoB, candidatoC, votosNulos, totalVotos);
+        double porcentajeMessi = 0;
+        double porcentajeMfrappé = 0;
+        double porcentajePenaldo = 0;
+        double porcentajeBlanco = 0;
+        if (totalVotos > 0)
+        {
+            porcentajeMessi = ((double)candidatoA / totalVotos) * 100;
+            porcentajeMfrappé = ((double)candidatoB / totalVotos) * 100;
+            porcentajePenaldo = ((double)candidatoC / totalVotos) * 100;
+            porcentajeBlanco = ((double)votosNulos / totalVotos) * 100;
+        };
+
+        Console.WriteLine($"Messi ({candidatoA})  {porcentajeMessi:F1}%   {new string('#', (int)(porcentajeMessi / 2))} ");
+        Console.WriteLine($"Mfrappé ({candidatoB})  {porcentajeMfrappé:F1}%   {new string('#', (int)(porcentajeMfrappé / 2))} ");
+        Console.WriteLine($"Penaldo ({candidatoC})  {porcentajePenaldo:F1}%   {new string('#', (int)(porcentajePenaldo / 2))}");
+        Console.WriteLine($"Votos en blanco ({votosNulos})  {porcentajeBlanco:F1}%   {new string('#', (int)(porcentajeBlanco / 2))}");
+
+        Console.WriteLine("Quisiera seguir ingresando votos? si / no");
+        string ans = Console.ReadLine();
+
+        if (ans == "si")
+        {
+            Console.WriteLine("Perfecto continuemos");
+            break;
+        }
+
+        if (ans == "no")
+        {
+            Console.Clear();
+            double porcentajeMessi2 = 0;
+            double porcentajeMfrappé2 = 0;
+            double porcentajePenaldo2 = 0;
+            double porcentajeBlanco2 = 0;
+            if (totalVotos > 0)
+            {
+                porcentajeMessi2 = ((double)candidatoA / totalVotos) * 100;
+                porcentajeMfrappé2 = ((double)candidatoB / totalVotos) * 100;
+                porcentajePenaldo2 = ((double)candidatoC / totalVotos) * 100;
+                porcentajeBlanco2 = ((double)votosNulos / totalVotos) * 100;
+            };
+
+            Console.WriteLine($"Messi ({candidatoA})  {porcentajeMessi2:F1}%   {new string('#', (int)(porcentajeMessi2 / 2))} ");
+            Console.WriteLine($"Mfrappé ({candidatoB})  {porcentajeMfrappé2:F1}%   {new string('#', (int)(porcentajeMfrappé2 / 2))} ");
+            Console.WriteLine($"Penaldo ({candidatoC})  {porcentajePenaldo2:F1}%   {new string('#', (int)(porcentajePenaldo2 / 2))}");
+            Console.WriteLine($"Votos en blanco ({votosNulos})  {porcentajeBlanco2:F1}%   {new string('#', (int)(porcentajeBlanco2 / 2))}");
+
+            int Votosmaximos = Math.Max(candidatoA, Math.Max(candidatoB, Math.Max(candidatoC, votosNulos)));
+            bool empate = false;
+
+            if (candidatoA == Votosmaximos && candidatoB == Votosmaximos && candidatoC == Votosmaximos && votosNulos == Votosmaximos)
+            {
+                Console.WriteLine("Hubo un empate total entre todos los candidatos y votos en blanco");
+            }
+            else
+            {
+                if (candidatoA == Votosmaximos)
+                {
+                    Console.WriteLine("Felicidades, el ganador es Messi!");
+                }
+                if (candidatoB == Votosmaximos)
+                {
+                    Console.WriteLine("Felicidades, el ganador es Mfrappé");
+                }
+                if (candidatoC == Votosmaximos)
+                {
+                    Console.WriteLine("Felicidades, el ganador es Penaldo");
+                }
+                if (candidatoA == Votosmaximos && candidatoB == Votosmaximos && candidatoA != candidatoC && candidatoA != votosNulos)
+                {
+                    Console.WriteLine("Rayos, hubo un empate entre Messi y Mfrappé!");
+                }
+            }
+        }
     }
     else if (opcionVoto == "6")
-    {
-        SimulacionVotos(generador, ref candidatoA, ref candidatoB, ref candidatoC, ref votosNulos, ref totalVotos);
+    { 
+    
     }
     else
     {
         Console.WriteLine("Opción no válida. Inténtalo nuevamente.");
         Console.ReadKey();
     }
-}
-
-//En esta parte le pedimos a chat GPT que con el código que escribimos arriba, nos realizara la manera de mostrar las elecciones y simular las elecciones
-//Cuando nos mandó la respuesta, invetsigamos lo que hacía la variable void para entender que fue lo que hizo
-//La variable void sirve para asignar y hace que no te devuelva ningún valor
-void MostrarResultados(int a, int b, int c, int blanco, int total)
-{
-    double porcentajeA = (total > 0) ? ((double)a / total) * 100 : 0;
-    double porcentajeB = (total > 0) ? ((double)b / total) * 100 : 0;
-    double porcentajeC = (total > 0) ? ((double)c / total) * 100 : 0;
-    double porcentajeBlanco = (total > 0) ? ((double)blanco / total) * 100 : 0;
-
-    Console.WriteLine($"Messi: {a} votos ({porcentajeA:F1}%) {new string('#', (int)(porcentajeA / 2))}");
-    Console.WriteLine($"Mfrappé: {b} votos ({porcentajeB:F1}%) {new string('#', (int)(porcentajeB / 2))}");
-    Console.WriteLine($"Penaldo: {c} votos ({porcentajeC:F1}%) {new string('#', (int)(porcentajeC / 2))}");
-    Console.WriteLine($"Voto en blanco: {blanco} votos ({porcentajeBlanco:F1}%) {new string('#', (int)(porcentajeBlanco / 2))}");
-}
-
-void SimulacionVotos(Random rng, ref int a, ref int b, ref int c, ref int blanco, ref int total)
-{
-    while (total < 130)
-    {
-        int votoAleatorio = rng.Next(1, 5);
-        if (votoAleatorio == 1) a++;
-        else if (votoAleatorio == 2) b++;
-        else if (votoAleatorio == 3) c++;
-        else blanco++;
-        total++;
-    }
-    Console.Clear();
-    MostrarResultados(a, b, c, blanco, total);
-    Console.WriteLine("Simulación completada.");
-    Console.ReadKey();
 }
