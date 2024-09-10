@@ -3,7 +3,10 @@ int altoVentana = Console.WindowHeight;
 string separador = new string('-', anchoVentana);
 string opcionVoto = "";
 int totalVotos = 0;
-int candidatoA = 0, candidatoB = 0, candidatoC = 0, votosNulos = 0;
+int candidatoA = 0;
+int candidatoB = 0;
+int candidatoC = 0;
+int votosNulos = 0;
 Random generador = new Random();
 bool seguirVotando = true;
 
@@ -48,7 +51,6 @@ while (seguirVotando)
     Console.WriteLine($"\n" + separador);
     Console.ResetColor();
 
-    // Menú de opciones
     Console.WriteLine("Selecciona a tu candidato favorito ingresando su número correspondiente.\n");
     Console.WriteLine("1. Messi");
     Console.WriteLine("2. Mfrappé");
@@ -60,6 +62,7 @@ while (seguirVotando)
     Console.SetCursorPosition(0, 26);
     Console.Write("Ingresa tu elección: ");
     opcionVoto = Console.ReadLine();
+    Console.Clear();
 
     if (opcionVoto == "1")
     {
@@ -83,7 +86,7 @@ while (seguirVotando)
     }
     else if (opcionVoto == "5")
     {
-        MostrarResultados(candidatoA, candidatoB, candidatoC, votosNulos, totalVotos);
+       MostrarResultados(candidatoA, candidatoB, candidatoC, votosNulos, totalVotos);
     }
     else if (opcionVoto == "6")
     {
@@ -96,6 +99,9 @@ while (seguirVotando)
     }
 }
 
+//En esta parte le pedimos a chat GPT que con el código que escribimos arriba, nos realizara la manera de mostrar las elecciones y simular las elecciones
+//Cuando nos mandó la respuesta, invetsigamos lo que hacía la variable void para entender que fue lo que hizo
+//La variable void sirve para asignar y hace que no te devuelva ningún valor
 void MostrarResultados(int a, int b, int c, int blanco, int total)
 {
     double porcentajeA = (total > 0) ? ((double)a / total) * 100 : 0;
@@ -103,15 +109,15 @@ void MostrarResultados(int a, int b, int c, int blanco, int total)
     double porcentajeC = (total > 0) ? ((double)c / total) * 100 : 0;
     double porcentajeBlanco = (total > 0) ? ((double)blanco / total) * 100 : 0;
 
-    Console.WriteLine($"Candidato A: {a} votos ({porcentajeA:F1}%) {new string('#', (int)(porcentajeA / 2))}");
-    Console.WriteLine($"Candidato B: {b} votos ({porcentajeB:F1}%) {new string('#', (int)(porcentajeB / 2))}");
-    Console.WriteLine($"Candidato C: {c} votos ({porcentajeC:F1}%) {new string('#', (int)(porcentajeC / 2))}");
+    Console.WriteLine($"Messi: {a} votos ({porcentajeA:F1}%) {new string('#', (int)(porcentajeA / 2))}");
+    Console.WriteLine($"Mfrappé: {b} votos ({porcentajeB:F1}%) {new string('#', (int)(porcentajeB / 2))}");
+    Console.WriteLine($"Penaldo: {c} votos ({porcentajeC:F1}%) {new string('#', (int)(porcentajeC / 2))}");
     Console.WriteLine($"Voto en blanco: {blanco} votos ({porcentajeBlanco:F1}%) {new string('#', (int)(porcentajeBlanco / 2))}");
 }
 
 void SimulacionVotos(Random rng, ref int a, ref int b, ref int c, ref int blanco, ref int total)
 {
-    while (total < 3000)
+    while (total < 130)
     {
         int votoAleatorio = rng.Next(1, 5);
         if (votoAleatorio == 1) a++;
@@ -120,7 +126,6 @@ void SimulacionVotos(Random rng, ref int a, ref int b, ref int c, ref int blanco
         else blanco++;
         total++;
     }
-
     Console.Clear();
     MostrarResultados(a, b, c, blanco, total);
     Console.WriteLine("Simulación completada.");
