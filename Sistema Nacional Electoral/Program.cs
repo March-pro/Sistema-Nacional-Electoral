@@ -286,6 +286,7 @@ while (seguirVotando)
         bool empatesim = false;
         string resultadoVotacionsim = "";
 
+        //En esta parte le pedimos a chatGPT que nos ordenera bien el código porque por estar desordenado, no salían bien los resultados.
         bool empatetotalsim = (candidatoA == votostotalessim && candidatoB == votostotalessim && candidatoC == votostotalessim && votosNulos == votostotalessim);
         bool ganamessisim = (candidatoA == votostotalessim && !(candidatoB == votostotalessim || candidatoC == votostotalessim || votosNulos == votostotalessim));
         bool ganamfrappésim = (candidatoB == votostotalessim && !(candidatoA == votostotalessim || candidatoC == votostotalessim || votosNulos == votostotalessim));
