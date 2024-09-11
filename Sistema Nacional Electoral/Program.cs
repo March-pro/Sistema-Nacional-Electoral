@@ -12,7 +12,6 @@ bool seguirVotando = true;
 
 while (seguirVotando)
 {
-    //Aquí usamos chat GPT para ver como ponerle colores a cada ciertas lineas del titulo
     //Usamos la idea de nuestros compañeros Emiliano Martínez y de Luis Martínez de ponerle color al título.
     //Funciona con el comando Console.ForegroundColor = ConsoleColor.(color asignado);
     Console.ForegroundColor = ConsoleColor.Green;
