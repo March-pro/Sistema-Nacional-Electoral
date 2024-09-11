@@ -12,6 +12,7 @@ bool seguirVotando = true;
 
 while (seguirVotando)
 {
+    //Aquí usamos chat GPT para ver como ponerle colores a cada ciertas lineas del titulo
     //Usamos la idea de nuestros compañeros Emiliano Martínez y de Luis Martínez de ponerle color al título.
     //Funciona con el comando Console.ForegroundColor = ConsoleColor.(color asignado);
     Console.ForegroundColor = ConsoleColor.Green;
@@ -117,10 +118,20 @@ while (seguirVotando)
                 porcentajeBlanco2 = ((double)votosNulos / totalVotos) * 100;
             };
 
-        Console.WriteLine($"Messi ({candidatoA})  {Math.Round(porcentajeMessi2, 2)}%   {new string('#', (int)(porcentajeMessi2 / 2))} ");
-        Console.WriteLine($"Mfrappé ({candidatoB})  {Math.Round(porcentajeMfrappé2, 2)}%   {new string('#', (int)(porcentajeMfrappé2 / 2))} ");
-        Console.WriteLine($"Penaldo ({candidatoC})  {Math.Round(porcentajePenaldo2, 2)}%   {new string('#', (int)(porcentajePenaldo2 / 2))}");
-        Console.WriteLine($"Votos en blanco ({votosNulos})  {Math.Round(porcentajeBlanco2, 2)}%   {new string('#', (int)(porcentajeBlanco2 / 2))}");
+           int maxLength = Math.Max(
+            Math.Max(candidatoA.ToString().Length, candidatoB.ToString().Length),
+            Math.Max(candidatoC.ToString().Length, votosNulos.ToString().Length)
+           );
+
+        int maxPorcentajeLength = Math.Max(
+            Math.Max(porcentajeMessi2.ToString().Length, porcentajeMfrappé2.ToString().Length),
+            Math.Max(porcentajePenaldo2.ToString().Length, porcentajeBlanco2.ToString().Length)
+            );
+
+        Console.WriteLine($"Messi".PadRight(20) + $"({candidatoA.ToString().PadLeft(maxLength)})" + $"  {Math.Round(porcentajeMessi2, 2)}%".PadLeft(maxPorcentajeLength + 5) + $"  {new string('#', (int)(Math.Round(porcentajeMessi2 / 2)))}");
+        Console.WriteLine($"Mfrappé".PadRight(20) + $"({candidatoB.ToString().PadLeft(maxLength)})" + $"  {Math.Round(porcentajeMfrappé, 2)}%".PadLeft(maxPorcentajeLength + 5) + $"  {new string('#', (int)(Math.Round(porcentajeMfrappé2 / 2)))}");
+        Console.WriteLine($"Penaldo".PadRight(20) + $"({candidatoC.ToString().PadLeft(maxLength)})" + $"  {Math.Round(porcentajePenaldo, 2)}%".PadLeft(maxPorcentajeLength + 5) + $"  {new string('#', (int)(Math.Round(porcentajePenaldo2 / 2)))}");
+        Console.WriteLine($"Voto en blanco".PadRight(20) + $"({votosNulos.ToString().PadLeft(maxLength)})" + $"  {Math.Round(porcentajeBlanco, 2)}%".PadLeft(maxPorcentajeLength + 5) + $"  {new string('#', (int)(Math.Round(porcentajeBlanco / 2)))}");
 
         Console.WriteLine("Quisiera seguir ingresando votos? si / no");
             string answer = Console.ReadLine();
@@ -138,52 +149,82 @@ while (seguirVotando)
             Console.Clear();
             int Votosmaximos = Math.Max(candidatoA, Math.Max(candidatoB, Math.Max(candidatoC, votosNulos)));
             bool empate = false;
+            string resultadoVotacion = "";
             Console.Clear();
 
             bool empatetotal = (candidatoA == Votosmaximos && candidatoB == Votosmaximos && candidatoC == Votosmaximos && votosNulos == Votosmaximos);
-            bool ganamessi = (candidatoA == Votosmaximos);
-            bool ganamfrappé = (candidatoB == Votosmaximos);
-            bool ganapenaldo = (candidatoC == Votosmaximos);
-            bool empateMeyM = (candidatoA == Votosmaximos && candidatoB == Votosmaximos && candidatoA != candidatoC && candidatoA != votosNulos);
-            bool empateMyP = (candidatoB == Votosmaximos && candidatoC == Votosmaximos && candidatoA != candidatoC && candidatoC != votosNulos);
-            bool empateMeyP = (candidatoC == Votosmaximos && candidatoA == Votosmaximos && candidatoB != candidatoC && candidatoB != votosNulos);
+
+            bool ganamessi = (candidatoA == Votosmaximos && !(candidatoB == Votosmaximos || candidatoC == Votosmaximos || votosNulos == Votosmaximos));
+            bool ganamfrappé = (candidatoB == Votosmaximos && !(candidatoA == Votosmaximos || candidatoC == Votosmaximos || votosNulos == Votosmaximos));
+            bool ganapenaldo = (candidatoC == Votosmaximos && !(candidatoA == Votosmaximos || candidatoB == Votosmaximos || votosNulos == Votosmaximos));
+
+            bool empateMeyM = (candidatoA == Votosmaximos && candidatoB == Votosmaximos && candidatoC != Votosmaximos && votosNulos != Votosmaximos);
+            bool empateMyP = (candidatoB == Votosmaximos && candidatoC == Votosmaximos && candidatoA != Votosmaximos && votosNulos != Votosmaximos);
+            bool empateMeyP = (candidatoC == Votosmaximos && candidatoA == Votosmaximos && candidatoB != Votosmaximos && votosNulos != Votosmaximos); Console.Clear();
+
+            if (empatetotal)
+            {
+                resultadoVotacion = "empateTotal";
+            }
+            else if (empateMeyM)
+            {
+                resultadoVotacion = "empateMeyM";
+            }
+            else if (empateMyP)
+            {
+                resultadoVotacion = "empateMyP";
+            }
+            else if (empateMeyP)
+            {
+                resultadoVotacion = "empateMeyP";
+            }
+            else if (ganamessi)
+            {
+                resultadoVotacion = "ganamessi";
+            }
+            else if (ganamfrappé)
+            {
+                resultadoVotacion = "ganamfrappé";
+            }
+            else if (ganapenaldo)
+            {
+                resultadoVotacion = "ganapenaldo";
+            }
 
             Console.Clear();
 
-            if (empatetotal!)
+            switch (resultadoVotacion)
             {
-                Console.WriteLine("Hubo un empate total entre todos los candidatos y votos en blanco");
-            }
-            else
-            {
-                if (ganamessi!)
-                {
+                case "empateTotal":
+                    Console.WriteLine("Hubo un empate total entre todos los candidatos y votos en blanco");
+                    break;
+
+                case "empateMeyM":
+                    Console.WriteLine("Mierda, hubo un empate entre Messi y Mfrappé!");
+                    break;
+
+                case "empateMyP":
+                    Console.WriteLine("Mierda, hubo un empate entre Mfrappé y Penaldo!");
+                    break;
+
+                case "empateMeyP":
+                    Console.WriteLine("Mierda, hubo un empate entre Messi y Penaldo!");
+                    break;
+
+                case "ganamessi":
                     Console.WriteLine("Felicidades, el ganador es Messi!");
-                }
-                if (ganamfrappé!)
-                {
+                    break;
+
+                case "ganamfrappé":
                     Console.WriteLine("Felicidades, el ganador es Mfrappé!");
-                }
-                if (ganapenaldo!)
-                {
+                    break;
+
+                case "ganapenaldo":
                     Console.WriteLine("Felicidades, el ganador es Penaldo!");
-                }
-                if (empateMeyM!)
-                {
-                    Console.WriteLine("Rayos, hubo un empate entre Messi y Mfrappé!");
-                }
-                if (empateMyP!)
-                {
-                    Console.WriteLine("Rayos, hubo un empate entre Mfrappé y Penaldo!");
-                }
-                if (empateMeyP!)
-                {
-                    Console.WriteLine("Rayos, hubo un empate entre Messi y Penaldo!");
-                }
+                    break;
+
             }
-
             break;
-
         }
     }
 
@@ -194,7 +235,7 @@ while (seguirVotando)
 
         Random rnd = new Random(); 
 
-        while (totalVotos < 130)
+        while (totalVotos <= 130)
         {
             int simulacionvotos = rnd.Next(1, 5); 
 
@@ -225,57 +266,95 @@ while (seguirVotando)
             porcentajeblancosim = ((double)votosNulos / totalVotos) * 100;
         }
 
-        Console.WriteLine($"Messi ({candidatoA})  {Math.Round(porcentajemessisim, 2)}%  {new string('#', (int)(Math.Round(porcentajemessisim / 2)))}");
-        Console.WriteLine($"Mfrappé ({candidatoB})  {Math.Round(porcentajemfrappésim, 2)}%  {new string('#', (int)(Math.Round(porcentajemfrappésim / 2)))}");
-        Console.WriteLine($"Penaldo ({candidatoC})  {Math.Round(porcentajepenaldosim, 2)}%  {new string('#', (int)(Math.Round(porcentajepenaldosim / 2)))}");
-        Console.WriteLine($"Voto en blanco ({votosNulos})  {Math.Round(porcentajeblancosim, 2)}%  {new string('#', (int)(Math.Round(porcentajeblancosim / 2)))}");
+        int maxLengthSim = Math.Max(
+            Math.Max(candidatoA.ToString().Length, candidatoB.ToString().Length),
+            Math.Max(candidatoC.ToString().Length, votosNulos.ToString().Length)
+        );
+
+        int maxPorcentajeLengthSim = Math.Max(
+            Math.Max(porcentajemessisim.ToString().Length, porcentajemfrappésim.ToString().Length),
+            Math.Max(porcentajepenaldosim.ToString().Length, porcentajeblancosim.ToString().Length) 
+            );
+
+        Console.WriteLine($"Messi".PadRight(20) + $"({candidatoA.ToString().PadLeft(maxLengthSim)})" + $"  {Math.Round(porcentajemessisim, 2)}%".PadLeft(maxPorcentajeLengthSim + 5) + $"  {new string('#', (int)(Math.Round(porcentajemessisim / 2)))}");
+        Console.WriteLine($"Mfrappé".PadRight(20) + $"({candidatoB.ToString().PadLeft(maxLengthSim)})" + $"  {Math.Round(porcentajemfrappésim, 2)}%".PadLeft(maxPorcentajeLengthSim + 5) + $"  {new string('#', (int)(Math.Round(porcentajemfrappésim / 2)))}");
+        Console.WriteLine($"Penaldo".PadRight(20) + $"({candidatoC.ToString().PadLeft(maxLengthSim)})" + $"  {Math.Round(porcentajepenaldosim, 2)}%".PadLeft(maxPorcentajeLengthSim + 5) + $"  {new string('#', (int)(Math.Round(porcentajepenaldosim / 2)))}");
+        Console.WriteLine($"Voto en blanco".PadRight(20) + $"({votosNulos.ToString().PadLeft(maxLengthSim)})" + $"  {Math.Round(porcentajeblancosim, 2)}%".PadLeft(maxPorcentajeLengthSim + 5) + $"  {new string('#', (int)(Math.Round(porcentajeblancosim / 2)))}");
 
 
         int votostotalessim = Math.Max(candidatoA, Math.Max(candidatoB, Math.Max(candidatoC, votosNulos)));
         bool empatesim = false;
-        bool empatetotalsim = (candidatoA == candidatoB && candidatoA == candidatoC && candidatoA == votosNulos);
-        bool ganamessisim = (candidatoA == votostotalessim);
-        bool ganamfrappésim = (candidatoB == votostotalessim);
-        bool ganapenaldosim = (candidatoC == votostotalessim);
-        bool empateMeyMsim = (candidatoA == votostotalessim && candidatoB == votostotalessim && candidatoA != candidatoC && candidatoA != votosNulos);
-        bool empateMyPsim = (candidatoB == votostotalessim && candidatoC == votostotalessim && candidatoB != candidatoA && candidatoB != votosNulos);
-        bool empateMeyPsim = (candidatoA == votostotalessim && candidatoC == votostotalessim && candidatoA != candidatoB && candidatoA != votosNulos);
+        string resultadoVotacionsim = "";
 
+        bool empatetotalsim = (candidatoA == votostotalessim && candidatoB == votostotalessim && candidatoC == votostotalessim && votosNulos == votostotalessim);
+        bool ganamessisim = (candidatoA == votostotalessim && !(candidatoB == votostotalessim || candidatoC == votostotalessim || votosNulos == votostotalessim));
+        bool ganamfrappésim = (candidatoB == votostotalessim && !(candidatoA == votostotalessim || candidatoC == votostotalessim || votosNulos == votostotalessim));
+        bool ganapenaldosim = (candidatoC == votostotalessim && !(candidatoA == votostotalessim || candidatoB == votostotalessim || votosNulos == votostotalessim));
 
+        bool empateMeyMsim = (candidatoA == votostotalessim && candidatoB == votostotalessim && candidatoC != votostotalessim && votosNulos != votostotalessim);
+        bool empateMyPsim = (candidatoB == votostotalessim && candidatoC == votostotalessim && candidatoA != votostotalessim && votosNulos != votostotalessim);
+        bool empateMeyPsim = (candidatoA == votostotalessim && candidatoC == votostotalessim && candidatoB != votostotalessim && votosNulos != votostotalessim);
+
+        int resultado;
         if (empatetotalsim)
         {
-            Console.WriteLine("Hubo un empate total entre todos los candidatos y los votos en blanco.");
+            resultadoVotacionsim = "empatetotalsim";
         }
-        else
+        else if (ganamessisim)
         {
-            if (ganamessisim)
-            {
+            resultadoVotacionsim = "ganamessisim";
+        }
+        else if (ganamfrappésim)
+        {
+            resultadoVotacionsim = "ganamfrappésim";
+        }
+        else if (ganapenaldosim)
+        {
+            resultadoVotacionsim = "ganapenaldosim";
+        }
+        else if (votosNulos == votostotalessim)
+        {
+            resultadoVotacionsim = "votosnulossim";
+        }
+        else if (empateMeyMsim)
+        {
+            resultadoVotacionsim = "empateMeyMsim";
+        }
+        else if (empateMeyPsim)
+        {
+            resultadoVotacionsim = "empateMeyPlsim";
+        }
+        else if (empateMyPsim)
+        {
+            resultadoVotacionsim = "empateMyPsim";
+        }
+
+        switch (resultadoVotacionsim)
+        {
+            case "empatetotalsim":
+                Console.WriteLine("Hubo un empate total entre todos los candidatos y los votos en blanco.");
+                break;
+            case "ganamessisim":
                 Console.WriteLine($"Felicidades! Messi es el ganador con {candidatoA} votos.");
-            }
-            if (ganamfrappésim)
-            {
-                Console.WriteLine($"Felicdades! Mfrappé es el ganador con {candidatoB} votos.");
-            }
-            if (ganapenaldosim)
-            {
+                break;
+            case "ganamfrappésim":
+                Console.WriteLine($"Felicidades! Mfrappé es el ganador con {candidatoB} votos.");
+                break;
+            case "ganapenaldosim":
                 Console.WriteLine($"Felicidades! Penaldo es el ganador con {candidatoC} votos.");
-            }
-            if (votosNulos == votostotalessim)
-            {
+                break;
+            case "votosnulossim":
                 Console.WriteLine($"Voto en blanco es el más votado con {votosNulos} votos.");
-            }
-            if (empateMeyMsim)
-            {
-                Console.WriteLine("Rayos, hubo un empate entre Messi y Mfrappé!");
-            }
-            if (empateMeyPsim)
-            {
-                Console.WriteLine("Rayos, hubo un empate entre Messi y Penaldo.");
-            }
-            if (empateMyPsim)
-            {
-                Console.WriteLine("Rayos, hubo un empate entre Mfrappé y Penaldo.");
-            }
+                break;
+            case "empateMeyMsim":
+                Console.WriteLine("Mierda, hubo un empate entre Messi y Mfrappé!");
+                break;
+            case "empateMeyP":
+                Console.WriteLine("Mierda, hubo un empate entre Messi y Penaldo.");
+                break;
+            case "empateMyP":
+                Console.WriteLine("Mierda, hubo un empate entre Mfrappé y Penaldo.");
+                break;
         }
 
         Console.WriteLine("Presiona cualquier tecla para finalizar...");
