@@ -55,7 +55,7 @@ while (seguirVotando)
     Console.WriteLine("1. Messi");
     Console.WriteLine("2. Mfrappé");
     Console.WriteLine("3. Penaldo");
-    Console.WriteLine("4. Voto en blanco\n"); 
+    Console.WriteLine("4. Voto en blanco\n");
     Console.WriteLine("Ingresa tu elección: \n");
     Console.WriteLine("5. Mostrar resultados");
     Console.WriteLine("6. Simulación de votaciones");
@@ -85,43 +85,24 @@ while (seguirVotando)
     }
     else if (opcionVoto == "5")
     {
-        double porcentajeMessi = 0;
-        double porcentajeMfrappé = 0;
-        double porcentajePenaldo = 0;
-        double porcentajeBlanco = 0;
+      
+        Console.Clear();
+        double porcentajeMessi2 = 0;
+        double porcentajeMfrappé2 = 0;
+        double porcentajePenaldo2 = 0;
+        double porcentajeBlanco2 = 0;
         if (totalVotos > 0)
         {
-            porcentajeMessi = ((double)candidatoA / totalVotos) * 100;
-            porcentajeMfrappé = ((double)candidatoB / totalVotos) * 100;
-            porcentajePenaldo = ((double)candidatoC / totalVotos) * 100;
-            porcentajeBlanco = ((double)votosNulos / totalVotos) * 100;
+            porcentajeMessi2 = ((double)candidatoA / totalVotos) * 100;
+            porcentajeMfrappé2 = ((double)candidatoB / totalVotos) * 100;
+            porcentajePenaldo2 = ((double)candidatoC / totalVotos) * 100;
+            porcentajeBlanco2 = ((double)votosNulos / totalVotos) * 100;
         };
 
-        Console.WriteLine($"Messi ({candidatoA})  {Math.Round(porcentajeMessi, 2)}%   {new string('#', (int)(porcentajeMessi / 2))} ");
-        Console.WriteLine($"Mfrappé ({candidatoB})  {Math.Round(porcentajeMfrappé, 2)}%   {new string('#', (int)(porcentajeMfrappé / 2))} ");
-        Console.WriteLine($"Penaldo ({candidatoC})  {Math.Round(porcentajePenaldo, 2)}%   {new string('#', (int)(porcentajePenaldo / 2))}");
-        Console.WriteLine($"Votos en blanco ({votosNulos})  {Math.Round(porcentajeBlanco, 2)}%   {new string('#', (int)(porcentajeBlanco / 2))}");
-
-        Console.WriteLine("Quisiera seguir ingresando votos? si / no");
-        string ans = Console.ReadLine();
-
-            Console.Clear();
-            double porcentajeMessi2 = 0;
-            double porcentajeMfrappé2 = 0;
-            double porcentajePenaldo2 = 0;
-            double porcentajeBlanco2 = 0;
-            if (totalVotos > 0)
-            {
-                porcentajeMessi2 = ((double)candidatoA / totalVotos) * 100;
-                porcentajeMfrappé2 = ((double)candidatoB / totalVotos) * 100;
-                porcentajePenaldo2 = ((double)candidatoC / totalVotos) * 100;
-                porcentajeBlanco2 = ((double)votosNulos / totalVotos) * 100;
-            };
-
-           int maxLength = Math.Max(
-            Math.Max(candidatoA.ToString().Length, candidatoB.ToString().Length),
-            Math.Max(candidatoC.ToString().Length, votosNulos.ToString().Length)
-           );
+        int maxLength = Math.Max(
+         Math.Max(candidatoA.ToString().Length, candidatoB.ToString().Length),
+         Math.Max(candidatoC.ToString().Length, votosNulos.ToString().Length)
+        );
 
         int maxPorcentajeLength = Math.Max(
             Math.Max(porcentajeMessi2.ToString().Length, porcentajeMfrappé2.ToString().Length),
@@ -129,14 +110,14 @@ while (seguirVotando)
             );
 
         Console.WriteLine($"Messi".PadRight(20) + $"({candidatoA.ToString().PadLeft(maxLength)})" + $"  {Math.Round(porcentajeMessi2, 2)}%".PadLeft(maxPorcentajeLength + 5) + $"  {new string('#', (int)(Math.Round(porcentajeMessi2 / 2)))}");
-        Console.WriteLine($"Mfrappé".PadRight(20) + $"({candidatoB.ToString().PadLeft(maxLength)})" + $"  {Math.Round(porcentajeMfrappé, 2)}%".PadLeft(maxPorcentajeLength + 5) + $"  {new string('#', (int)(Math.Round(porcentajeMfrappé2 / 2)))}");
-        Console.WriteLine($"Penaldo".PadRight(20) + $"({candidatoC.ToString().PadLeft(maxLength)})" + $"  {Math.Round(porcentajePenaldo, 2)}%".PadLeft(maxPorcentajeLength + 5) + $"  {new string('#', (int)(Math.Round(porcentajePenaldo2 / 2)))}");
-        Console.WriteLine($"Voto en blanco".PadRight(20) + $"({votosNulos.ToString().PadLeft(maxLength)})" + $"  {Math.Round(porcentajeBlanco, 2)}%".PadLeft(maxPorcentajeLength + 5) + $"  {new string('#', (int)(Math.Round(porcentajeBlanco / 2)))}");
+        Console.WriteLine($"Mfrappé".PadRight(20) + $"({candidatoB.ToString().PadLeft(maxLength)})" + $"  {Math.Round(porcentajeMfrappé2, 2)}%".PadLeft(maxPorcentajeLength + 5) + $"  {new string('#', (int)(Math.Round(porcentajeMfrappé2 / 2)))}");
+        Console.WriteLine($"Penaldo".PadRight(20) + $"({candidatoC.ToString().PadLeft(maxLength)})" + $"  {Math.Round(porcentajePenaldo2, 2)}%".PadLeft(maxPorcentajeLength + 5) + $"  {new string('#', (int)(Math.Round(porcentajePenaldo2 / 2)))}");
+        Console.WriteLine($"Voto en blanco".PadRight(20) + $"({votosNulos.ToString().PadLeft(maxLength)})" + $"  {Math.Round(porcentajeBlanco2, 2)}%".PadLeft(maxPorcentajeLength + 5) + $"  {new string('#', (int)(Math.Round(porcentajeBlanco2 / 2)))}");
 
         Console.WriteLine("Quisiera seguir ingresando votos? si / no");
-            string answer = Console.ReadLine();
-            
-            Console.Clear();
+        string answer = Console.ReadLine();
+
+        Console.Clear();
 
         while (answer == "si")
         {
@@ -233,11 +214,11 @@ while (seguirVotando)
     {
         Console.WriteLine("Simulando elecciones, espere un segundo.");
 
-        Random rnd = new Random(); 
+        Random rnd = new Random();
 
         while (totalVotos <= 130)
         {
-            int simulacionvotos = rnd.Next(1, 5); 
+            int simulacionvotos = rnd.Next(1, 5);
 
             if (simulacionvotos == 1)
                 candidatoA++;
@@ -273,7 +254,7 @@ while (seguirVotando)
 
         int maxPorcentajeLengthSim = Math.Max(
             Math.Max(porcentajemessisim.ToString().Length, porcentajemfrappésim.ToString().Length),
-            Math.Max(porcentajepenaldosim.ToString().Length, porcentajeblancosim.ToString().Length) 
+            Math.Max(porcentajepenaldosim.ToString().Length, porcentajeblancosim.ToString().Length)
             );
 
         Console.WriteLine($"Messi".PadRight(20) + $"({candidatoA.ToString().PadLeft(maxLengthSim)})" + $"  {Math.Round(porcentajemessisim, 2)}%".PadLeft(maxPorcentajeLengthSim + 5) + $"  {new string('#', (int)(Math.Round(porcentajemessisim / 2)))}");
@@ -363,5 +344,5 @@ while (seguirVotando)
 
         break;
     }
-   
+
 }
