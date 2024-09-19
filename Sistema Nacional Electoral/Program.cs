@@ -40,14 +40,14 @@ while (seguirVotando)
     Console.ForegroundColor = ConsoleColor.Cyan;
     Console.WriteLine($"\n" + separador + "\n");
     Console.ResetColor();
-
+    // Muestra el número total de votos centrado en la pantalla.
     string resumenVotos = $"Votos totales: {totalVotos}";
     Console.WriteLine(resumenVotos.PadLeft((anchoVentana + resumenVotos.Length) / 2));
 
     Console.ForegroundColor = ConsoleColor.Blue;
     Console.WriteLine($"\n" + separador);
     Console.ResetColor();
-
+    // Muestra el menú de opciones de votación.
     Console.WriteLine("Selecciona a tu candidato favorito ingresando su número correspondiente.\n");
     Console.WriteLine("1. Messi");
     Console.WriteLine("2. Mfrappé");
@@ -59,11 +59,11 @@ while (seguirVotando)
     Console.SetCursorPosition(21, 23);
     opcionVoto = Console.ReadLine();
     Console.Clear();
-
+    // Compara la opción ingresada por el usuario y ajusta los contadores de votos según la elección.
     if (opcionVoto == "1")
     {
         candidatoA++;
-        totalVotos++;
+        totalVotos++; // Incrementa el total de votos.
     }
     else if (opcionVoto == "2")
     {
@@ -82,8 +82,9 @@ while (seguirVotando)
     }
     else if (opcionVoto == "5")
     {
-      
+
         Console.Clear();
+        // Calcula los porcentajes de votos para cada candidato.
         double porcentajeMessi2 = 0;
         double porcentajeMfrappé2 = 0;
         double porcentajePenaldo2 = 0;
@@ -100,12 +101,16 @@ while (seguirVotando)
          Math.Max(candidatoA.ToString().Length, candidatoB.ToString().Length),
          Math.Max(candidatoC.ToString().Length, votosNulos.ToString().Length)
         );
-
+        // Encuentra las longitudes máximas de los números y porcentajes para formatear la salida de forma uniforme.
         int maxPorcentajeLength = Math.Max(
             Math.Max(porcentajeMessi2.ToString().Length, porcentajeMfrappé2.ToString().Length),
             Math.Max(porcentajePenaldo2.ToString().Length, porcentajeBlanco2.ToString().Length)
             );
 
+        // Muestra los resultados simulados de las votaciones para cada candidato.
+        // Se usa PadRight para alinear el nombre "Messi" a la derecha con 20 caracteres, seguido del número de votos.
+        // Se utiliza Math.Round para redondear el porcentaje de votos de Messi a 2 decimales y PadLeft para formatear.
+        // Finalmente, se genera una barra de progreso con '#' proporcional al porcentaje de votos.
         Console.WriteLine($"Messi".PadRight(20) + $"({candidatoA.ToString().PadLeft(maxLength)})" + $"  {Math.Round(porcentajeMessi2, 2)}%".PadLeft(maxPorcentajeLength + 5) + $"  {new string('#', (int)(Math.Round(porcentajeMessi2 / 2)))}");
         Console.WriteLine($"Mfrappé".PadRight(20) + $"({candidatoB.ToString().PadLeft(maxLength)})" + $"  {Math.Round(porcentajeMfrappé2, 2)}%".PadLeft(maxPorcentajeLength + 5) + $"  {new string('#', (int)(Math.Round(porcentajeMfrappé2 / 2)))}");
         Console.WriteLine($"Penaldo".PadRight(20) + $"({candidatoC.ToString().PadLeft(maxLength)})" + $"  {Math.Round(porcentajePenaldo2, 2)}%".PadLeft(maxPorcentajeLength + 5) + $"  {new string('#', (int)(Math.Round(porcentajePenaldo2 / 2)))}");
@@ -115,7 +120,7 @@ while (seguirVotando)
         string answer = Console.ReadLine();
 
         Console.Clear();
-
+        // bucle que se repetirá mientras el usuario elija si
         while (answer == "si")
         {
             Console.WriteLine("Perfecto continuemos");
@@ -129,7 +134,7 @@ while (seguirVotando)
             bool empate = false;
             string resultadoVotacion = "";
             Console.Clear();
-
+            //verifica los resultados, ganador y empates
             bool empatetotal = (candidatoA == Votosmaximos && candidatoB == Votosmaximos && candidatoC == Votosmaximos && votosNulos == Votosmaximos);
 
             bool ganamessi = (candidatoA == Votosmaximos && !(candidatoB == Votosmaximos || candidatoC == Votosmaximos || votosNulos == Votosmaximos));
@@ -140,7 +145,9 @@ while (seguirVotando)
             bool empateMyP = (candidatoB == Votosmaximos && candidatoC == Votosmaximos && candidatoA != Votosmaximos && votosNulos != Votosmaximos);
             bool empateMeyP = (candidatoC == Votosmaximos && candidatoA == Votosmaximos && candidatoB != Votosmaximos && votosNulos != Votosmaximos); Console.Clear();
 
+            //asigna el valor de resultado votacion
             if (empatetotal)
+
             {
                 resultadoVotacion = "empateTotal";
             }
@@ -170,7 +177,7 @@ while (seguirVotando)
             }
 
             Console.Clear();
-
+            // se mostrará el resultado de la variable resultadovotacion
             switch (resultadoVotacion)
             {
                 case "empateTotal":
@@ -206,17 +213,18 @@ while (seguirVotando)
         }
     }
 
-
+    // Da la simulación de las elecciones
     if (opcionVoto == "6")
     {
         Console.WriteLine("Simulando elecciones, espere un segundo.");
-
+        // Instancia de la clase Random para generar votos aleatorios.
         Random rnd = new Random();
-
+        // Bucle que continúa mientras el total de votos sea menor o igual a 130.
         while (totalVotos <= 130)
         {
             int simulacionvotos = rnd.Next(1, 5);
-
+            // Se genera un número aleatorio entre 1 y 4 para determinar el candidato al que va el voto.
+          
             if (simulacionvotos == 1)
                 candidatoA++;
             else if (simulacionvotos == 2)
@@ -227,6 +235,7 @@ while (seguirVotando)
                 votosNulos++;
 
             totalVotos++;
+            // Condiciones para aumentar el contador del candidato correspondiente o los votos nulos.
         }
 
         Console.Clear();
@@ -235,15 +244,17 @@ while (seguirVotando)
         double porcentajemfrappésim = 0;
         double porcentajepenaldosim = 0;
         double porcentajeblancosim = 0;
+        // Variables para almacenar los porcentajes de votos de cada opción.
 
         if (totalVotos > 0)
+        // Cálculo de los porcentajes solo si se ha registrado al menos un voto.
         {
             porcentajemessisim = ((double)candidatoA / totalVotos) * 100;
             porcentajemfrappésim = ((double)candidatoB / totalVotos) * 100;
             porcentajepenaldosim = ((double)candidatoC / totalVotos) * 100;
             porcentajeblancosim = ((double)votosNulos / totalVotos) * 100;
         }
-
+        // Cálculo de la longitud máxima de los números de votos para ajustar la alineación.
         int maxLengthSim = Math.Max(
             Math.Max(candidatoA.ToString().Length, candidatoB.ToString().Length),
             Math.Max(candidatoC.ToString().Length, votosNulos.ToString().Length)
@@ -253,13 +264,13 @@ while (seguirVotando)
             Math.Max(porcentajemessisim.ToString().Length, porcentajemfrappésim.ToString().Length),
             Math.Max(porcentajepenaldosim.ToString().Length, porcentajeblancosim.ToString().Length)
             );
-
+        // Muestra los resultados en la consola con gráficos de barras basados en los porcentajes.
         Console.WriteLine($"Messi".PadRight(20) + $"({candidatoA.ToString().PadLeft(maxLengthSim)})" + $"  {Math.Round(porcentajemessisim, 2)}%".PadLeft(maxPorcentajeLengthSim + 5) + $"  {new string('#', (int)(Math.Round(porcentajemessisim / 2)))}");
         Console.WriteLine($"Mfrappé".PadRight(20) + $"({candidatoB.ToString().PadLeft(maxLengthSim)})" + $"  {Math.Round(porcentajemfrappésim, 2)}%".PadLeft(maxPorcentajeLengthSim + 5) + $"  {new string('#', (int)(Math.Round(porcentajemfrappésim / 2)))}");
         Console.WriteLine($"Penaldo".PadRight(20) + $"({candidatoC.ToString().PadLeft(maxLengthSim)})" + $"  {Math.Round(porcentajepenaldosim, 2)}%".PadLeft(maxPorcentajeLengthSim + 5) + $"  {new string('#', (int)(Math.Round(porcentajepenaldosim / 2)))}");
         Console.WriteLine($"Voto en blanco".PadRight(20) + $"({votosNulos.ToString().PadLeft(maxLengthSim)})" + $"  {Math.Round(porcentajeblancosim, 2)}%".PadLeft(maxPorcentajeLengthSim + 5) + $"  {new string('#', (int)(Math.Round(porcentajeblancosim / 2)))}");
 
-
+        // Inicialización de variables para detectar empates y determinar el ganador.
         int votostotalessim = Math.Max(candidatoA, Math.Max(candidatoB, Math.Max(candidatoC, votosNulos)));
         bool empatesim = false;
         string resultadoVotacionsim = "";
@@ -274,6 +285,7 @@ while (seguirVotando)
         bool empateMeyPsim = (candidatoA == votostotalessim && candidatoC == votostotalessim && candidatoB != votostotalessim && votosNulos != votostotalessim);
 
         int resultado;
+        // Inicializa la variable para almacenar el resultado de la votación.
         if (empatetotalsim)
         {
             resultadoVotacionsim = "empatetotalsim";
@@ -306,7 +318,7 @@ while (seguirVotando)
         {
             resultadoVotacionsim = "empateMyPsim";
         }
-
+        // Dependiendo del valor de "resultadoVotacionsim", muestra el mensaje correspondiente.
         switch (resultadoVotacionsim)
         {
             case "empatetotalsim":
@@ -334,7 +346,7 @@ while (seguirVotando)
                 Console.WriteLine("Mierda, hubo un empate entre Mfrappé y Penaldo.");
                 break;
         }
-
+        // Espera que el usuario presione una tecla para finalizar la simulación.
         Console.WriteLine("Presiona cualquier tecla para finalizar...");
         Console.ReadKey();
 
