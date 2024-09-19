@@ -1,14 +1,14 @@
-int anchoVentana = Console.WindowWidth;
-int altoVentana = Console.WindowHeight;
-string separador = new string('-', anchoVentana);
-string opcionVoto = "";
-int totalVotos = 0;
-int candidatoA = 0;
-int candidatoB = 0;
-int candidatoC = 0;
-int votosNulos = 0;
-Random generador = new Random();
-bool seguirVotando = true;
+int anchoVentana = Console.WindowWidth; // Obtiene el ancho actual de la ventana de la consola.
+int altoVentana = Console.WindowHeight; // Obtiene la altura actual de la ventana de la consola.
+string separador = new string('-', anchoVentana); // Crea una cadena separadora de guiones con el ancho de la ventana.
+string opcionVoto = ""; // Inicializa la variable que almacenará la opción de voto seleccionada por el usuario.
+int totalVotos = 0; // Inicializa el contador de votos totales.
+int candidatoA = 0; // Inicializa el contador de votos para el candidato A (Messi).
+int candidatoB = 0; // Inicializa el contador de votos para el candidato B (Mfrappé).
+int candidatoC = 0; // Inicializa el contador de votos para el candidato C (Penaldo).
+int votosNulos = 0; // Inicializa el contador de votos en blanco.
+Random generador = new Random(); // Crea una instancia de la clase Random para generar números aleatorios (usado más adelante).
+bool seguirVotando = true; // Inicializa un valor booleano para controlar si el ciclo de votación continúa o se detiene.
 
 while (seguirVotando)
 {
